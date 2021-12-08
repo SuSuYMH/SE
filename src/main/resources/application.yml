@@ -26,5 +26,14 @@ spring:
       #单次最大请求大小
       max-request-size: 100MB
 
+#自定义标签，用于文件上传和下载
+file:
+  upload:
+    disableTypes: dll,exe
+    dir: /Users/su/test-文件上传下载实验目录/
+
+
+
+
 
 
