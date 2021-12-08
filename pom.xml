@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<!--父pom-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.7</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+
+	<!--坐标-->
+	<groupId>com.susu</groupId>
+	<artifactId>SE</artifactId>
+	<version>1.0</version>
+
+
+
+	<!--名称-->
+	<name>SE</name>
+	<description>SE</description>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+
+
+	<!--依赖-->
+	<dependencies>
+
+		<!--druid连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.2.6</version>
+		</dependency>
+
+		<!--mysql驱动-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!--JPA场景启动器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!--shiro-->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring-boot-starter</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+
+
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-data-redis</artifactId>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.session</groupId>-->
+<!--			<artifactId>spring-session-data-redis</artifactId>-->
+<!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-test</artifactId>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+
+	</dependencies>
+
+
+
+	<!--插件-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

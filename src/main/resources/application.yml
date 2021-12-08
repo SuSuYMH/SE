@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://139.224.65.154:3306/SE3?serverTimezone=UTC
+      username: root
+      password: YMHlikebaby99
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5Dialect
+  servlet:
+    multipart:
+      #开启上传和下载
+      enabled: true
+      #最大的文件大小
+      max-file-size: 100MB
+      #单次最大请求大小
+      max-request-size: 100MB
+
+
+
