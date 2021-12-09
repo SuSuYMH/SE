@@ -26,7 +26,7 @@ public class ShiroConfig {
         //配置系统的受限资源
         Map<String, String> map = new HashMap<>();
         // map.put("/**","authc")表示系统中所有的资源都要进行认证和授权
-        map.put("/administrators","authc");//authc:请求这个资源需要认证和授权
+//        map.put("/administrators","authc");//authc:请求这个资源需要认证和授权
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         //配置系统的公共资源
 

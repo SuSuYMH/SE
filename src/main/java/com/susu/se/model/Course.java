@@ -1,5 +1,6 @@
 package com.susu.se.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class Course {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
     @JoinColumn(name = "course_id")
+    @JsonBackReference
     private List<CourseFile> courseFiles;
 
 }
