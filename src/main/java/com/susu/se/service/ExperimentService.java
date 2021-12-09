@@ -53,8 +53,7 @@ public class ExperimentService {
 
     //修改某一课程
     public Result<String> alterExperiment(Integer experimentId, String experimentName,String intro){
-        Experiment experiment = new Experiment();
-        experiment.setExperimentId(experimentId);
+        Experiment experiment = experimentRepository.getById(experimentId);
         experiment.setName(experimentName);
         experiment.setIntro(intro);
         experimentRepository.save(experiment);
