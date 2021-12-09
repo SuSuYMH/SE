@@ -1,5 +1,6 @@
 package com.susu.se.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,5 +24,12 @@ public class Experiment {
     //外键字段的名称
     @JoinColumn(name = "experiment_id")
     private List<Report> reports;
+
+    //多个实验对应一个课程，删除实验时不删除课程，所以是detach
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    //外键字段的名称
+    @JoinColumn(name = "course_id")
+    @JsonBackReference
+    private Course course;
 
 }

@@ -16,6 +16,9 @@ public class Course {
 
     private String name;
 
+    //课程介绍
+    private String intro;
+
     //一对多的时候默认是懒加载
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
@@ -26,6 +29,7 @@ public class Course {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
     @JoinColumn(name = "course_id")
+    @JsonBackReference
     private List<Experiment> experiments;
 
     //一门课程对应多个课程文件

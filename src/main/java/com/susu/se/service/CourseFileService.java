@@ -147,7 +147,7 @@ public class CourseFileService {
 
     }
 
-    //下载次数加1,根据file的id去查的，方便
+    //下载次数加1,根据file的name去查的，方便
     public Result<String> downloadTimesPlusOne(String fileName){
         CourseFile courseFile = courseFileRepository.findByFileName(fileName);
         Integer downloadTimes = courseFile.getDownloadTimes()+1;
