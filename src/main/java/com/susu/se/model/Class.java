@@ -33,6 +33,12 @@ public class Class {
     @JoinColumn(name = "class_id")
     private List<Takes> takesList;
 
+    //一个课程对应多个班级公告
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "class_id")
+    @JsonBackReference
+    private List<ClassNotice> classNotices;
+
     //一个课程可以有多个班级
     @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     //外键字段的名称

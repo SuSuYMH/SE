@@ -1,5 +1,6 @@
 package com.susu.se.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -29,6 +30,7 @@ public class Administrator {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
     @JoinColumn(name = "administrator_id")
+    @JsonBackReference
     private List<SysNotice> sysNotices;
 
     //一对多的时候默认是懒加载

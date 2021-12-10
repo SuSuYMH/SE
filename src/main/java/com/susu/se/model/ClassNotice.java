@@ -1,18 +1,15 @@
 package com.susu.se.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 @Entity
-@Table(name = "sys_notice")
-public class SysNotice {
+@Table(name = "class_notice")
+public class ClassNotice {
     @Id
     @Column(name = "notice_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +24,8 @@ public class SysNotice {
     private Date uploadTime;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(name ="administrator_id")
+    @JoinColumn(name ="class_id")
     @JsonBackReference
-    private Administrator administrator;
+    private Class aClass;
+
 }

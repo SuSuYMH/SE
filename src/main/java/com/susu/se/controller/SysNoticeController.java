@@ -4,10 +4,7 @@ import com.susu.se.model.SysNotice;
 import com.susu.se.service.SysNoticeService;
 import com.susu.se.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,9 +20,27 @@ public class SysNoticeController {
         return sysNoticeService.getSysNotice(id);
     }
 
-    //查询所有nnotice
+    //查询所有sysnotice
     @GetMapping
     public Result<List<SysNotice>> getAll(){
         return sysNoticeService.getAllSysNotice();
+    }
+
+    //添加sysnotice
+    @PostMapping(path = "/add")
+    public Result<String> addNotice(@RequestParam("category") String category,@RequestParam("title") String title,@RequestParam("content") String content){
+        return sysNoticeService.addSysNotice(category, title, content);
+    }
+
+    //删除sysnotice
+    @DeleteMapping("/{sysNoticeId}")
+    public Result<String> deleteSysNotice(@PathVariable Integer sysNoticeId){
+        return sysNoticeService.deleteSysNotice(sysNoticeId);
+    }
+
+    //更改sysNotice
+    @PostMapping("/alter/{sysNoticeId}")
+    public Result<String> alterSysNotice(@PathVariable Integer sysNoticeId, @RequestParam("category") String category,@RequestParam("title") String title,@RequestParam("content") String content){
+        return sysNoticeService.alterSysNotice(sysNoticeId, category, title, content);
     }
 }
