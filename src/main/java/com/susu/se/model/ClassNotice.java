@@ -26,6 +26,6 @@ public class ClassNotice {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name ="class_id")
     @JsonBackReference
-    private Class aClass;
+    private Class kecheng;
 
 }
