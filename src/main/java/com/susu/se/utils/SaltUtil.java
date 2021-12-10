@@ -14,9 +14,4 @@ public class SaltUtil {
         return sb.toString();
 
     }
-
-//    public static void main(String[] args) {
-//        String salt = getSalt(8);
-//        System.out.println(salt);
-//    }
 }

@@ -23,6 +23,7 @@ public class Course {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
     @JoinColumn(name = "course_id")
+    @JsonBackReference
     private List<Class> classes;
 
     //一对多的时候默认是懒加载

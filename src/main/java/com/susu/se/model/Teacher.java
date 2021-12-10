@@ -29,4 +29,11 @@ public class Teacher {
     @OneToMany(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private List<CourseFile> courseFiles;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id")
+    @JsonBackReference
+    private List<Class> classes;
+
+
 }

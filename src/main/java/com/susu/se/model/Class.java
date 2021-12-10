@@ -1,5 +1,7 @@
 package com.susu.se.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.susu.se.utils.ClassTimeUtil;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,25 +19,31 @@ public class Class {
 
     private String room;
 
-    private Time startTime;
+    //经过慎重的考虑，还是一个星期一节课就得了，要是有多个时间点上课的话，就要创建一个上课时间的表，而且与class表还是多对多的关系，就还要搞出
+    //一个中间表，太麻烦太麻烦！
 
-    private Time endTime;
+    //星期几
+    private Integer week;
+    //上课时间
+    private String startTime;
+    //下课时间
+    private String endTime;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
     private List<Takes> takesList;
 
-//    @ManyToMany
-//    //中间表需要JoinTable来维护外键
-//    /*
-//    * name 指定中间表的名称
-//    * joinColumns 设置此中间表关于本表（class）的外键名称
-//    * inverseJoinColumns 设置中间表关于另一个表（student）的外键名称
-//    * */
-//    @JoinTable(name = "takes",
-//            joinColumns = {@JoinColumn(name ="class_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "student_id")}
-//    )
-//    private List<Student> students;
+    //一个课程可以有多个班级
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    //外键字段的名称
+    @JoinColumn(name = "course_id")
+    @JsonBackReference
+    private Course course;
+
+    //一个课程对应一个老师，删除课程不影响老师
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id")
+    @JsonBackReference
+    private Teacher teacher;
 
 }
