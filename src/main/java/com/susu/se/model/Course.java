@@ -39,4 +39,11 @@ public class Course {
     @JsonBackReference
     private List<CourseFile> courseFiles;
 
+    //一个管理员可以创建多个实验
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    //外键字段的名称
+    @JoinColumn(name = "administrator_id")
+    @JsonBackReference
+    private Administrator administrator;
+
 }
