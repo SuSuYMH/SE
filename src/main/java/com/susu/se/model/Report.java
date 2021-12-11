@@ -7,6 +7,7 @@ import com.susu.se.model.users.Teacher;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 
 @Data
@@ -30,7 +31,10 @@ public class Report {
     private Boolean endOrNot;
 
     //这个实验报告的得分
-    private String score;
+    private Integer score;
+
+    //老师打得评语
+    private String pingYu;
 
     //评阅时间
     private Date appraiseTime;
