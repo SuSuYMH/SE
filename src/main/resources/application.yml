@@ -8,6 +8,9 @@ spring:
       url: jdbc:mysql://139.224.65.154:3306/SE4?serverTimezone=UTC
       username: root
       password: YMHlikebaby99
+#      url: jdbc:mysql://106.14.69.227:3306/SE?serverTimezone=UTC
+#      username: root
+#      password: Db123456?
   jpa:
     database: MYSQL
     show-sql: true

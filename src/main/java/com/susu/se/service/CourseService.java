@@ -1,5 +1,6 @@
 package com.susu.se.service;
 
+import com.susu.se.model.Class;
 import com.susu.se.model.users.Administrator;
 import com.susu.se.model.Course;
 import com.susu.se.repository.AdministratorRepository;
@@ -8,6 +9,7 @@ import com.susu.se.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,9 @@ public class CourseService {
 
     @Autowired
     private AdministratorRepository administratorRepository;
+
+    @Autowired
+    private TakeClassService takeClassService;
 
     //根据id获取课程，这个好像没有用。。。。
     public Result<Course> getCourse(Integer id){
@@ -60,5 +65,20 @@ public class CourseService {
         course.get().setIntro(intro);
         courseRepository.save(course.get());
         return Result.wrapSuccessfulResult("课程资料修改成功！");
+    }
+
+    //根据学生id查处他对应的课程
+    public Result<List<Course>> getAllCourseByStudentId(Integer studentId){
+        //先根据学生id查出他对应的class
+        Result<List<Class>> allClassByStudentIdR = takeClassService.getAllClassByStudentId(studentId);
+        List<Class> allClassByStudentId = allClassByStudentIdR.getData();
+
+        //查出每个class对应的course
+        List<Course> courses = new ArrayList<>();
+        for(Class banJi : allClassByStudentId){
+            courses.add(banJi.getCourse());
+        }
+        return Result.wrapSuccessfulResult(courses);
+
     }
 }
