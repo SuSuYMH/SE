@@ -1,10 +1,12 @@
-package com.susu.se.model;
+package com.susu.se.model.users;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.susu.se.model.Class;
+import com.susu.se.model.CourseFile;
+import com.susu.se.model.Report;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Data
@@ -15,10 +17,11 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer teacherId;
 
+    //与User的一对一
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "evaluator_id")
+    @JoinColumn(name = "user_id")
     @JsonBackReference
-    private Evaluator evaluator;
+    private User user;
 
     //一个老师对应多个助教，删除老师的同时删除助教，没有老师助教没有意义
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -34,6 +37,12 @@ public class Teacher {
     @JoinColumn(name = "teacher_id")
     @JsonBackReference
     private List<Class> classes;
+
+    //同一个评阅者会评阅很多实验报告
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    //外键字段的名称
+    @JoinColumn(name = "teacher_id")
+    private List<Report> reports;
 
 
 }

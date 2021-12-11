@@ -1,16 +1,19 @@
 package com.susu.se.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.susu.se.utils.ClassTimeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.susu.se.model.users.Teacher;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "class")
+////在实体类中 发现有字段为null，在转化成json的时候，fasterxml.jackson将对象转换为json报错
+////解决办法在实体类上面添加：
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer" ,"handler"})
 public class Class {
     @Id
     @Column(name = "class_id")
@@ -31,7 +34,8 @@ public class Class {
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
-    private List<Takes> takesList;
+    @JsonBackReference
+    private List<TakeClass> takeClassList;
 
     //一个课程对应多个班级公告
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

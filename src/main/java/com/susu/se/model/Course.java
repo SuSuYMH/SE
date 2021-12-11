@@ -1,6 +1,7 @@
 package com.susu.se.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.susu.se.model.users.Administrator;
 import lombok.Data;
 
 import javax.persistence.*;

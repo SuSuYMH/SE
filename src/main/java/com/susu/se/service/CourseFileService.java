@@ -3,17 +3,14 @@ package com.susu.se.service;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.json.JSONObject;
-import com.susu.se.model.Administrator;
 import com.susu.se.model.Course;
 import com.susu.se.model.CourseFile;
-import com.susu.se.model.Teacher;
+import com.susu.se.model.users.Teacher;
 import com.susu.se.repository.CourseFileRepository;
 import com.susu.se.repository.CourseRepository;
 import com.susu.se.repository.TeacherRepository;
 import com.susu.se.utils.Result;
-import com.susu.se.utils.SaltUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

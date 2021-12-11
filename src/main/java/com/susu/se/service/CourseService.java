@@ -1,6 +1,6 @@
 package com.susu.se.service;
 
-import com.susu.se.model.Administrator;
+import com.susu.se.model.users.Administrator;
 import com.susu.se.model.Course;
 import com.susu.se.repository.AdministratorRepository;
 import com.susu.se.repository.CourseRepository;

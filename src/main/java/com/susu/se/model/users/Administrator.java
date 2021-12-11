@@ -1,12 +1,12 @@
-package com.susu.se.model;
+package com.susu.se.model.users;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.susu.se.model.Course;
+import com.susu.se.model.SysNotice;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -18,13 +18,11 @@ public class Administrator {
     @Column(name = "administrator_id")
     private Integer administerId;
 
-    private String name;
-
-    private String password;
-
-    private String email;
-
-    private String salt;
+    //与User的一对一
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User user;
 
     //一对多的时候默认是懒加载
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -38,4 +36,6 @@ public class Administrator {
     //外键字段的名称
     @JoinColumn(name = "administrator_id")
     private List<Course> courses;
+
+
 }

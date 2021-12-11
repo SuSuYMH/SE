@@ -1,10 +1,12 @@
-package com.susu.se.model;
+package com.susu.se.model.users;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.susu.se.model.Report;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,8 +17,14 @@ public class Assistant {
     private Integer assistantId;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "evaluator_id")
+    @JoinColumn(name = "user_id")
     @JsonBackReference
-    private Evaluator evaluator;
+    private User user;
+
+    //同一个评阅者会评阅很多实验报告
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    //外键字段的名称
+    @JoinColumn(name = "assistant_id")
+    private List<Report> reports;
 
 }

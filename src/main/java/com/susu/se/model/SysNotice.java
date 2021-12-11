@@ -1,9 +1,9 @@
 package com.susu.se.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.susu.se.model.users.Administrator;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -2,6 +2,7 @@ package com.susu.se.service;
 
 import com.susu.se.model.*;
 import com.susu.se.model.Class;
+import com.susu.se.model.users.Teacher;
 import com.susu.se.repository.ClassRepository;
 import com.susu.se.repository.CourseRepository;
 import com.susu.se.repository.TeacherRepository;

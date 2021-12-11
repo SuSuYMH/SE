@@ -1,11 +1,11 @@
 package com.susu.se.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.susu.se.model.users.Teacher;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity

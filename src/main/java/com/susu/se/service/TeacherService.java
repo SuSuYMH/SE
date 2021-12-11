@@ -1,7 +1,6 @@
 package com.susu.se.service;
 
-import com.susu.se.model.Course;
-import com.susu.se.model.Teacher;
+import com.susu.se.model.users.Teacher;
 import com.susu.se.repository.TeacherRepository;
 import com.susu.se.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,13 @@ import java.util.Optional;
 public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
+
+    public Result<String> deleteById(Integer teacherId){
+        teacherRepository.deleteById(teacherId);
+        return Result.wrapSuccessfulResult("删除成功！");
+    }
+
+
 
     public Result<Teacher> getTeacher(Integer id){
         Optional<Teacher> teacher=teacherRepository.findById(id);
