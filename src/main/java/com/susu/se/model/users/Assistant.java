@@ -21,6 +21,11 @@ public class Assistant {
     @JsonBackReference
     private User user;
 
+    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id")
+    @JsonBackReference
+    private Teacher teacher;
+
     //同一个评阅者会评阅很多实验报告
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
