@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -17,6 +18,11 @@ public class TakeClass {
     private Integer takesId;
 
     private Integer grade;
+
+    //参与课程的学生才能有反馈信息，其实可以新建一张表出来，但还是放在这里得了
+    private String feedback;
+
+    private Date feedbackTime;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")

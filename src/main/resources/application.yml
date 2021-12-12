@@ -1,16 +1,28 @@
 server:
   port: 8080
 
+
+
 spring:
+
+  redis:
+    host: 139.224.65.154
+    port: 6379
+    database: 0
+
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://139.224.65.154:3306/SE4?serverTimezone=UTC
+      url: jdbc:mysql://139.224.65.154:3306/SE_TEST?serverTimezone=UTC
       username: root
       password: YMHlikebaby99
 #      url: jdbc:mysql://106.14.69.227:3306/SE?serverTimezone=UTC
 #      username: root
 #      password: Db123456?
+#      url: jdbc:mysql://127.0.0.1:3306/SE?serverTimezone=UTC
+#      username: root
+#      password: Db123456?
+
   jpa:
     database: MYSQL
     show-sql: true
@@ -20,6 +32,7 @@ spring:
       properties:
         hibernate:
           dialect: org.hibernate.dialect.MySQL5Dialect
+
   servlet:
     multipart:
       #开启上传和下载
@@ -29,11 +42,16 @@ spring:
       #单次最大请求大小
       max-request-size: 100MB
 
+
+
+
+
 #自定义标签，用于文件上传和下载
 file:
   upload:
     disableTypes: dll,exe
     dir: /Users/su/test-文件上传下载实验目录/
+#    dir: /courseFile
 
 
 

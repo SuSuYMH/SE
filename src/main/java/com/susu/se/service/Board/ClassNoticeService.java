@@ -1,4 +1,4 @@
-package com.susu.se.service;
+package com.susu.se.service.Board;
 
 import com.susu.se.model.Class;
 import com.susu.se.model.ClassNotice;

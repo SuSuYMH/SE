@@ -1,4 +1,4 @@
-package com.susu.se.controller;
+package com.susu.se.controller.Academic;
 
 import com.susu.se.model.Course;
 import com.susu.se.service.CourseService;

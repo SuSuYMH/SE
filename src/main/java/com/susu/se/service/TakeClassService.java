@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,8 +70,6 @@ public class TakeClassService {
     public Result<List<Student>> getAllStudentByClassId(Integer classId){
         Optional<Class> byId1 = classRepository.findById(classId);
         Class aClass = byId1.get();
-//        System.out.println("------------------------");
-//        System.out.println(aClass.getClassId());
         List<TakeClass> takeClassByAClasses = takeClassRepository.findTakeClassesByKecheng(aClass);
         List<Student> studentsByClass = new ArrayList<>();
         for(TakeClass oneTake: takeClassByAClasses){
@@ -78,7 +77,4 @@ public class TakeClassService {
         }
         return Result.wrapSuccessfulResult(studentsByClass);
     }
-
-
-
 }

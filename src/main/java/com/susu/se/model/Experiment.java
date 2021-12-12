@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -18,6 +19,8 @@ public class Experiment {
     private String name;
 
     private String intro;
+
+    private Date uploadTime;
 
     //同一个实验会有很多实验报告
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

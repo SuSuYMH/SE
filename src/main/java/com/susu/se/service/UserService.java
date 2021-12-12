@@ -7,7 +7,12 @@ import com.susu.se.repository.*;
 import com.susu.se.utils.Result;
 import com.susu.se.utils.SaltUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -126,21 +131,49 @@ public class UserService {
         return Result.wrapSuccessfulResult("Register Success！！！");
     }
 
-//    //注册业务
-//    public Result<String> register(User user){
-//        //1.生成随机盐
-//        String salt = SaltUtil.getSalt(8);
-//        //2.将随机盐保存到数据库
-//        user.setSalt(salt);
-//        //3.对明文密码进行md5、salt、hash散列
-//        Md5Hash md5Hash = new Md5Hash(user.getPassword(),salt,1024);
-//        //4.把生成的密码赋值给对象
-//        user.setPassword(md5Hash.toHex());
-//
-//        //注意这里还要改一改！！！返回标准格式
-//        userRepository.save(user);
-//        return Result.wrapSuccessfulResult("Register Success！！！");
-//    }
+    //登陆业务
+    public Result<Integer> login(String name, String password){
+        //获取主体对象
+        Subject subject = SecurityUtils.getSubject();
+        //
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+
+        try {
+            subject.login(new UsernamePasswordToken(user.getName(), user.getPassword()));
+            //返回用户对应的具体的角色表的id
+            User userByName = userRepository.findUserByName(name);
+            Integer roleId = userByName.getRoleId();
+            //根据roleId和user,查出角色表中的id
+            switch (roleId){
+                case 1:
+                    Administrator administratorByUser = administratorRepository.findAdministratorByUser(userByName);
+                    return Result.wrapSuccessfulResult(administratorByUser.getAdministerId()).setMessage("登陆成功！");
+                case 2:
+                    Teacher teacherByUser = teacherRepository.findTeacherByUser(userByName);
+                    return Result.wrapSuccessfulResult(teacherByUser.getTeacherId()).setMessage("登陆成功！");
+                case 3:
+                    Assistant assistantByUser = assistantRepository.findAssistantByUser(userByName);
+                    return Result.wrapSuccessfulResult(assistantByUser.getAssistantId()).setMessage("登陆成功！");
+                case 4:
+                    Student studentByUser = studentRepository.findStudentByUser(userByName);
+                    return Result.wrapSuccessfulResult(studentByUser.getStudentId()).setMessage("登陆成功！");
+                default:
+                    userRepository.delete(user);
+                    return Result.wrapErrorResult("创建角色失败！");
+            }
+        }  catch (UnknownAccountException e) {
+            e.printStackTrace();
+            return Result.wrapErrorResult("用户名错误!");
+        } catch (IncorrectCredentialsException e) {
+            e.printStackTrace();
+            return Result.wrapErrorResult("密码错误!");
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.wrapErrorResult(e.getMessage());
+        }
+    }
 
     //根据用户名查询，数据库中的行
     public User findByName(String name){

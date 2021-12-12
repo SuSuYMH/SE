@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -65,6 +66,12 @@ public class SubmitReportService {
         Student student = byId.get();
         Optional<Experiment> byId1 = experimentRepository.findById(experimentId);
         Experiment experiment = byId1.get();
+        try {
+            reportRepository.findReportByExperimentAndStudent(experiment, student);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.wrapSuccessfulResult(null);
+        }
         Report reportByExperimentAndStudent = reportRepository.findReportByExperimentAndStudent(experiment, student);
         return Result.wrapSuccessfulResult(reportByExperimentAndStudent);
     }

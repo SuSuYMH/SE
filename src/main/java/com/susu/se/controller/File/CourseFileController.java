@@ -1,4 +1,4 @@
-package com.susu.se.controller;
+package com.susu.se.controller.File;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.json.JSONException;

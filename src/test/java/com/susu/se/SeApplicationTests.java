@@ -1,13 +1,13 @@
-package com.susu.se;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class SeApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//package com.susu.se;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class SeApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}

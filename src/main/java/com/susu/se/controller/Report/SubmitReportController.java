@@ -1,4 +1,4 @@
-package com.susu.se.controller;
+package com.susu.se.controller.Report;
 
 import com.susu.se.model.Report;
 import com.susu.se.service.SubmitReportService;

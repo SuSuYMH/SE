@@ -1,4 +1,4 @@
-package com.susu.se.controller;
+package com.susu.se.controller.User;
 
 import com.susu.se.service.AssistantService;
 import com.susu.se.utils.Result;
