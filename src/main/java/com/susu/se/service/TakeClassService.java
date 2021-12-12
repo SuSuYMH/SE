@@ -36,6 +36,8 @@ public class TakeClassService {
         TakeClass studentTakeClass = new TakeClass();
         studentTakeClass.setStudent(student);
         studentTakeClass.setKecheng(aClass);
+        studentTakeClass.setNumOfAttendance(0.0);
+        studentTakeClass.setAllNumOfAttendance(0.0);
 
         takeClassRepository.save(studentTakeClass);
         return Result.wrapSuccessfulResult("参加课程成功！");

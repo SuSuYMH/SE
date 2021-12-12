@@ -18,8 +18,8 @@ public class ClassController {
 
     //添加班级
     @PostMapping(path = "/add")
-    public Result<String> addClass(@RequestParam("week") Integer week,@RequestParam("starttime") String startTime,@RequestParam("endtime") String endTime,@RequestParam("room") String room,@RequestParam("courseid") Integer courseId,@RequestParam("teacherid") Integer teacherId){
-        return classService.addClass(week,startTime,endTime,room, courseId,teacherId);
+    public Result<String> addClass(@RequestParam("week") Integer week,@RequestParam("starttime") String startTime,@RequestParam("endtime") String endTime,@RequestParam("room") String room,@RequestParam("reportrate") Integer reportRate,@RequestParam("attendrate") Integer attendRate,@RequestParam("cprate") Integer confrontPracticeRate,@RequestParam("courseid") Integer courseId,@RequestParam("teacherid") Integer teacherId){
+        return classService.addClass(week,startTime,endTime,room,reportRate, attendRate, confrontPracticeRate, courseId,teacherId);
     }
 
     //获取所有班级
@@ -34,16 +34,16 @@ public class ClassController {
         return classService.getAllClassOfCourse(courseId);
     }
 
-    //删除某一实验项目
+    //删除某一班级
     @DeleteMapping("/{classId}")
     public Result<String> deleteOneClass(@PathVariable Integer classId){
         return classService.deleteClass(classId);
     }
 
-    //更新实验项目
+    //更新班级信息
     @PostMapping("/alter/{classId}")
-    public Result<String> alterOneClass(@RequestParam("week") Integer week,@RequestParam("starttime") String startTime,@RequestParam("endtime") String endTime,@RequestParam("room") String room, @PathVariable Integer classId){
-        return classService.alterCourse(week, startTime, endTime, room, classId);
+    public Result<String> alterOneClass(@RequestParam("week") Integer week,@RequestParam("starttime") String startTime,@RequestParam("endtime") String endTime,@RequestParam("room") String room,@RequestParam("reportrate") Integer reportRate,@RequestParam("attendrate") Integer attendRate,@RequestParam("cprate") Integer confrontPracticeRate, @PathVariable Integer classId){
+        return classService.alterCourse(week, startTime, endTime, room,reportRate, attendRate, confrontPracticeRate,  classId);
     }
 
 }

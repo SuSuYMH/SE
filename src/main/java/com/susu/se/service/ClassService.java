@@ -44,8 +44,7 @@ public class ClassService {
     }
 
     //增加班级，需要课程id和教师id
-    public Result<String> addClass(Integer week, String startTime,String endTime,String room, Integer courseId, Integer teacherId){
-
+    public Result<String> addClass(Integer week, String startTime,String endTime,String room,Integer reportRate, Integer attendRate,Integer confrontPracticeRate,  Integer courseId, Integer teacherId){
         Course course = courseRepository.findById(courseId).get();
         Teacher teacher = teacherRepository.findById(teacherId).get();
         Class aClass = new Class();
@@ -53,6 +52,9 @@ public class ClassService {
         aClass.setWeek(week);
         aClass.setStartTime(startTime);
         aClass.setEndTime(endTime);
+        aClass.setReportRate(reportRate);
+        aClass.setAttendRate(attendRate);
+        aClass.setConfrontPracticeRate(confrontPracticeRate);
         aClass.setCourse(course);
         aClass.setTeacher(teacher);
 
@@ -61,12 +63,15 @@ public class ClassService {
     }
 
     //修改班级信息
-    public Result<String> alterCourse(Integer week, String startTime,String endTime,String room, Integer classId){
+    public Result<String> alterCourse(Integer week, String startTime,String endTime,String room,Integer reportRate, Integer attendRate,Integer confrontPracticeRate, Integer classId){
         Class aClass = classRepository.findById(classId).get();
         aClass.setRoom(room);
         aClass.setWeek(week);
         aClass.setStartTime(startTime);
         aClass.setEndTime(endTime);
+        aClass.setReportRate(reportRate);
+        aClass.setAttendRate(attendRate);
+        aClass.setConfrontPracticeRate(confrontPracticeRate);
 
         classRepository.save(aClass);
         return Result.wrapSuccessfulResult("课程信息修改成功！");

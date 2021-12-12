@@ -18,12 +18,12 @@ public class AppraiseReportController {
     private AppraiseReportService appraiseReportService;
 
     @PostMapping("/appraisebyta")
-    public Result<String> appraiseByTA(@RequestParam("reportid") Integer reportId,@RequestParam("score") Integer score,@RequestParam("pingyu") String pingYu, @RequestParam("assistantid") Integer assistantId){
+    public Result<String> appraiseByTA(@RequestParam("reportid") Integer reportId,@RequestParam("score") Double score,@RequestParam("pingyu") String pingYu, @RequestParam("assistantid") Integer assistantId){
         return appraiseReportService.appraiseReportByTA(reportId, score, pingYu, assistantId);
     }
 
     @PostMapping("/appraisebyte")
-    public Result<String> appraiseByTeacher(@RequestParam("reportid") Integer reportId,@RequestParam("score") Integer score,@RequestParam("pingyu") String pingYu, @RequestParam("teacherid") Integer teacherId){
+    public Result<String> appraiseByTeacher(@RequestParam("reportid") Integer reportId,@RequestParam("score") Double score,@RequestParam("pingyu") String pingYu, @RequestParam("teacherid") Integer teacherId){
         return appraiseReportService.appraiseReportByTeacher(reportId, score, pingYu, teacherId);
     }
 

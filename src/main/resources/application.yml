@@ -13,15 +13,15 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://139.224.65.154:3306/SE_TEST?serverTimezone=UTC
+      #自己开发时使用的数据库
+      url: jdbc:mysql://139.224.65.154:3306/SE4?serverTimezone=UTC
       username: root
       password: YMHlikebaby99
+##      放到服务器上的时候的数据库
 #      url: jdbc:mysql://106.14.69.227:3306/SE?serverTimezone=UTC
 #      username: root
 #      password: Db123456?
-#      url: jdbc:mysql://127.0.0.1:3306/SE?serverTimezone=UTC
-#      username: root
-#      password: Db123456?
+
 
   jpa:
     database: MYSQL
@@ -50,7 +50,9 @@ spring:
 file:
   upload:
     disableTypes: dll,exe
+    #自己开发时的测试上传文件路径
     dir: /Users/su/test-文件上传下载实验目录/
+    #docker容器中的文件路径
 #    dir: /courseFile
 
 

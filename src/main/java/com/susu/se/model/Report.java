@@ -31,7 +31,7 @@ public class Report {
     private Boolean endOrNot;
 
     //这个实验报告的得分
-    private Integer score;
+    private Double score;
 
     //老师打得评语
     private String pingYu;

@@ -37,7 +37,7 @@ public class AppraiseReportService {
 
     //评阅实验报告，给出报告id和分数即可
     //教师评阅
-    public Result<String> appraiseReportByTeacher(Integer reportId, Integer score, String pingYu, Integer teacherId){
+    public Result<String> appraiseReportByTeacher(Integer reportId, Double score, String pingYu, Integer teacherId){
         Optional<Teacher> byId1 = teacherRepository.findById(teacherId);
         Teacher teacher = byId1.get();
         Optional<Report> byId = reportRepository.findById(reportId);
@@ -52,7 +52,7 @@ public class AppraiseReportService {
         return Result.wrapSuccessfulResult("批改成功！");
     }
     //助教评阅
-    public Result<String> appraiseReportByTA(Integer reportId, Integer score, String pingYu, Integer assistantId){
+    public Result<String> appraiseReportByTA(Integer reportId, Double score, String pingYu, Integer assistantId){
         Optional<Assistant> byId1 = assistantRepository.findById(assistantId);
         Assistant assistant = byId1.get();
         Optional<Report> byId = reportRepository.findById(reportId);

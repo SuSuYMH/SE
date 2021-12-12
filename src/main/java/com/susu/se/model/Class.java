@@ -32,6 +32,14 @@ public class Class {
     //下课时间
     private String endTime;
 
+    //成绩比例
+    //报告占比
+    private Integer reportRate;
+    //签到占比
+    private Integer attendRate;
+    //对抗练习占比
+    private Integer ConfrontPracticeRate;
+
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
     @JsonBackReference
