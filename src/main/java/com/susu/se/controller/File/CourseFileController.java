@@ -42,7 +42,7 @@ CourseFileController {
     }
 
 
-//    @RequiresPermissions("uploadFile")
+    @RequiresPermissions("uploadFile")
     @ResponseBody
     @PostMapping("/uploadFile")
     public Result<String> fileUpload(@RequestParam("file") MultipartFile file,@RequestParam("courseid") Integer courseId,@RequestParam("teacherid") Integer teacherId) throws JSONException {

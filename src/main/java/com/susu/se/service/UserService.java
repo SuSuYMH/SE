@@ -138,9 +138,12 @@ public class UserService {
         User user = new User();
         user.setName(name);
         user.setPassword(password);
+        user.setActivation(false);
 
         try {
-            subject.login(new UsernamePasswordToken(user.getName(), user.getPassword()));
+            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getName(), user.getPassword());
+            subject.login(usernamePasswordToken);
+
             //返回用户对应的具体的角色表的id
             User userByName = userRepository.findUserByName(name);
             Integer roleId = userByName.getRoleId();
@@ -148,15 +151,19 @@ public class UserService {
             switch (roleId){
                 case 1:
                     Administrator administratorByUser = administratorRepository.findAdministratorByUser(userByName);
+//                    return Result.wrapSuccessfulResult(usernamePasswordToken);
                     return Result.wrapSuccessfulResult(administratorByUser.getAdministerId()).setMessage("登陆成功！");
                 case 2:
                     Teacher teacherByUser = teacherRepository.findTeacherByUser(userByName);
+//                    return Result.wrapSuccessfulResult(usernamePasswordToken);
                     return Result.wrapSuccessfulResult(teacherByUser.getTeacherId()).setMessage("登陆成功！");
                 case 3:
                     Assistant assistantByUser = assistantRepository.findAssistantByUser(userByName);
+//                    return Result.wrapSuccessfulResult(usernamePasswordToken);
                     return Result.wrapSuccessfulResult(assistantByUser.getAssistantId()).setMessage("登陆成功！");
                 case 4:
                     Student studentByUser = studentRepository.findStudentByUser(userByName);
+//                    return Result.wrapSuccessfulResult(usernamePasswordToken);
                     return Result.wrapSuccessfulResult(studentByUser.getStudentId()).setMessage("登陆成功！");
                 default:
                     userRepository.delete(user);

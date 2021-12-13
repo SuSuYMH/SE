@@ -5,10 +5,28 @@ server:
 
 spring:
 
+
+  mail:
+    host: smtp.163.com
+    username: Lovely_Su_Su@163.com #自己的邮箱账号
+    password: ZYDDNIDUXAAKANKY  #这个不是登录密码而是163授权登录的密码
+    default-encoding: UTF-8
+    test-connection: true
+
+
   redis:
     host: 139.224.65.154
     port: 6379
     database: 0
+    password: 123456
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        # 连接池中的最小空闲连接
+        min-idle: 0
 
   datasource:
     druid:
@@ -21,7 +39,6 @@ spring:
 #      url: jdbc:mysql://106.14.69.227:3306/SE?serverTimezone=UTC
 #      username: root
 #      password: Db123456?
-
 
   jpa:
     database: MYSQL

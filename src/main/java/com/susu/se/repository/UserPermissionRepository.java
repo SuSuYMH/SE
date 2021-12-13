@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface UserPermissionRepository extends JpaRepository<UserVSPermission, Integer> {
-    List<Permission> findUserVSPermissionsByUser(User user);
+    List<UserVSPermission> findUserVSPermissionsByUser(User user);
 }

@@ -26,6 +26,9 @@ public class User {
 
     private String salt;
 
+    //激活状态
+    private Boolean activation;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonBackReference

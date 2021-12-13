@@ -1,6 +1,7 @@
 package com.susu.se.utils.ShiroRealms;
 
 import com.susu.se.model.Permission;
+import com.susu.se.model.UserVSPermission;
 import com.susu.se.model.users.User;
 import com.susu.se.repository.UserPermissionRepository;
 import com.susu.se.service.UserService;
@@ -16,6 +17,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,11 +36,15 @@ public class TestRealm extends AuthorizingRealm{
         //获取user_permission
         UserPermissionRepository userPermissionRepository =(UserPermissionRepository) ApplicationContextUtil.getBean("userPermissionRepository");
         //根据user查出他所有的permission
-        List<Permission> userVSPermissionsByUser = userPermissionRepository.findUserVSPermissionsByUser(user);
+        List<UserVSPermission> userVSPermissionsByUser = userPermissionRepository.findUserVSPermissionsByUser(user);
+        ArrayList<Permission> permissionArrayList = new ArrayList<Permission>();
+        for(UserVSPermission userPermission:userVSPermissionsByUser){
+            permissionArrayList.add(userPermission.getPermission());
+        }
         //添加到要返回的simpleAuthorizationInfo中
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        userVSPermissionsByUser.forEach(userVSPermissionByUser-> {
-            simpleAuthorizationInfo.addStringPermission(userVSPermissionByUser.getPermissionString());
+        permissionArrayList.forEach(permission-> {
+            simpleAuthorizationInfo.addStringPermission(permission.getPermissionString());
         });
         return simpleAuthorizationInfo;
     }
