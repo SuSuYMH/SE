@@ -3,6 +3,7 @@ package com.susu.se.service;
 import com.susu.se.error.UserNotExistedError;
 import com.susu.se.model.users.*;
 import com.susu.se.repository.*;
+import com.susu.se.utils.Return.ID;
 import com.susu.se.utils.Return.Result;
 import com.susu.se.utils.SaltUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +52,6 @@ public class UserService {
         Boolean nullornot = userlist.isEmpty();
         return new Result<>(nullornot, userlist);
     }
-
 
     public Result<String> deleteById(Integer id){
         Optional<User> userOP=userRepository.findById(id);
@@ -131,7 +131,7 @@ public class UserService {
     }
 
     //登陆业务
-    public Result<Integer> login(String name, String password){
+    public Result<ID> login(String name, String password){
         //获取主体对象
         Subject subject = SecurityUtils.getSubject();
         //
@@ -151,20 +151,28 @@ public class UserService {
             switch (roleId){
                 case 1:
                     Administrator administratorByUser = administratorRepository.findAdministratorByUser(userByName);
-//                    return Result.wrapSuccessfulResult(usernamePasswordToken);
-                    return Result.wrapSuccessfulResult(administratorByUser.getAdministerId()).setMessage("登陆成功！");
+                    ID id = new ID();
+                    id.setUserId(userByName.getUserId());
+                    id.setSpecialId(administratorByUser.getAdministerId());
+                    return Result.wrapSuccessfulResult(id).setMessage("登陆成功！");
                 case 2:
                     Teacher teacherByUser = teacherRepository.findTeacherByUser(userByName);
-//                    return Result.wrapSuccessfulResult(usernamePasswordToken);
-                    return Result.wrapSuccessfulResult(teacherByUser.getTeacherId()).setMessage("登陆成功！");
+                    ID id1 = new ID();
+                    id1.setUserId(userByName.getUserId());
+                    id1.setSpecialId(teacherByUser.getTeacherId());
+                    return Result.wrapSuccessfulResult(id1).setMessage("登陆成功！");
                 case 3:
                     Assistant assistantByUser = assistantRepository.findAssistantByUser(userByName);
-//                    return Result.wrapSuccessfulResult(usernamePasswordToken);
-                    return Result.wrapSuccessfulResult(assistantByUser.getAssistantId()).setMessage("登陆成功！");
+                    ID id2 = new ID();
+                    id2.setUserId(userByName.getUserId());
+                    id2.setSpecialId(assistantByUser.getAssistantId());
+                    return Result.wrapSuccessfulResult(id2).setMessage("登陆成功！");
                 case 4:
                     Student studentByUser = studentRepository.findStudentByUser(userByName);
-//                    return Result.wrapSuccessfulResult(usernamePasswordToken);
-                    return Result.wrapSuccessfulResult(studentByUser.getStudentId()).setMessage("登陆成功！");
+                    ID id3 = new ID();
+                    id3.setUserId(userByName.getUserId());
+                    id3.setSpecialId(studentByUser.getStudentId());
+                    return Result.wrapSuccessfulResult(id3).setMessage("登陆成功！");
                 default:
                     userRepository.delete(user);
                     return Result.wrapErrorResult("创建角色失败！");

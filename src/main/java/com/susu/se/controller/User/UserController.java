@@ -2,6 +2,7 @@ package com.susu.se.controller.User;
 
 import com.susu.se.model.users.User;
 import com.susu.se.service.UserService;
+import com.susu.se.utils.Return.ID;
 import com.susu.se.utils.Return.Result;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class UserController {
 
     //登陆
     @PostMapping(path= "/login")
-    public Result<Integer> login(@RequestParam("name") String name, @RequestParam("password") String password){
+    public Result<ID> login(@RequestParam("name") String name, @RequestParam("password") String password){
 //        //获取主体对象
 //        Subject subject = SecurityUtils.getSubject();
 //        //

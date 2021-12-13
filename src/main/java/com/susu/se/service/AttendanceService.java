@@ -8,10 +8,12 @@ import com.susu.se.repository.StudentRepository;
 import com.susu.se.repository.TakeClassRepository;
 import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class AttendanceService {
@@ -24,8 +26,11 @@ public class AttendanceService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     //为班级中的每个学生创建一次签到,给一个班级id
-    public Result<String> addAttendanceToAllStudentOfClass(Integer classId){
+    public Result<String> addAttendanceToAllStudentOfClass(Integer classId, String attendCode){
         //查出class实体
         Optional<Class> byId = classRepository.findById(classId);
         Class BanJi = byId.get();
@@ -39,24 +44,33 @@ public class AttendanceService {
             takeClass.setAllNumOfAttendance(num);
             takeClassRepository.save(takeClass);
         }
-
+        redisTemplate.opsForValue().set(classId, attendCode, 60 * 5, TimeUnit.SECONDS);
         return Result.wrapSuccessfulResult("wow").setMessage("设置签到成功！");
     }
 
     //学生签到
-    public Result<String> studentAttendClass(Integer studentId, Integer classId){
-        Optional<Student> byId = studentRepository.findById(studentId);
-        Student student = byId.get();
-        Optional<Class> byId1 = classRepository.findById(classId);
-        Class aClass = byId1.get();
-        TakeClass takeClass = takeClassRepository.findTakeClassByStudentAndKecheng(student, aClass);
+    public Result<String> studentAttendClass(Integer studentId, Integer classId, String attendCode){
+        if(redisTemplate.opsForValue().get(classId)==null){
+            return Result.wrapErrorResult("签到码过期！请准时签到！");
+        }
+        if(redisTemplate.opsForValue().get(classId).equals(attendCode)){
+            Optional<Student> byId = studentRepository.findById(studentId);
+            Student student = byId.get();
+            Optional<Class> byId1 = classRepository.findById(classId);
+            Class aClass = byId1.get();
+            TakeClass takeClass = takeClassRepository.findTakeClassByStudentAndKecheng(student, aClass);
 
-        Double numOfAttendance = takeClass.getNumOfAttendance()+1;
-        takeClass.setNumOfAttendance(numOfAttendance);
+            Double numOfAttendance = takeClass.getNumOfAttendance()+1;
+            takeClass.setNumOfAttendance(numOfAttendance);
 
-        takeClassRepository.save(takeClass);
+            takeClassRepository.save(takeClass);
 
-        return Result.wrapSuccessfulResult("wow").setMessage("签到成功！");
+            return Result.wrapSuccessfulResult("wow").setMessage("签到成功！");
+        }else{
+            return Result.wrapErrorResult("签到码错误！");
+        }
+
+
     }
 
 }
