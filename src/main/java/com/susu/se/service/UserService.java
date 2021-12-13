@@ -89,6 +89,7 @@ public class UserService {
         user.setName(name);
         user.setRoleId(roleId);
         user.setEmail(email);
+        user.setActivation(false);
         //1.生成随机盐
         String salt = SaltUtil.getSalt(8);
         //2.将随机盐保存到数据库
@@ -98,8 +99,9 @@ public class UserService {
         //4.把生成的密码赋值给对象
         user.setPassword(md5Hash.toHex());
 
-        //在父表中创建
-        userRepository.save(user);
+        //这下面这两句是个大错误！！！你下面save的时候会把user又save一遍！！！（因为你cascade设置的事all！）
+//        //在父表中创建
+//        userRepository.save(user);
 
         //根据roleid创建子类的表
         switch (roleId){

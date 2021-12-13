@@ -12,7 +12,17 @@ spring:
     password: ZYDDNIDUXAAKANKY  #这个不是登录密码而是163授权登录的密码
     default-encoding: UTF-8
     test-connection: true
-
+    #以下是部署到阿里云上要用到的配置！！！！！
+    port: 465
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+          ssl:
+            enable: true
 
   redis:
     host: 139.224.65.154
@@ -43,6 +53,7 @@ spring:
   jpa:
     database: MYSQL
     show-sql: true
+    open-in-view: false
     hibernate:
       ddl-auto: update
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
@@ -68,9 +79,9 @@ file:
   upload:
     disableTypes: dll,exe
     #自己开发时的测试上传文件路径
-    dir: /Users/su/test-文件上传下载实验目录/
+#    dir: /Users/su/test-文件上传下载实验目录/
     #docker容器中的文件路径
-#    dir: /courseFile
+    dir: /courseFile
 
 
 
