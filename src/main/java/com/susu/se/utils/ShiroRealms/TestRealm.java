@@ -1,6 +1,8 @@
 package com.susu.se.utils.ShiroRealms;
 
+import com.susu.se.model.Permission;
 import com.susu.se.model.users.User;
+import com.susu.se.repository.UserPermissionRepository;
 import com.susu.se.service.UserService;
 import com.susu.se.utils.ApplicationContextUtil;
 import org.apache.shiro.authc.AuthenticationException;
@@ -8,10 +10,13 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 
 //自定义Realm,需要调用业务方法去做实现,业务对象是交给工厂管理的，而Realm没有交给工厂管理，所以没有办法直接注入service
@@ -20,8 +25,22 @@ public class TestRealm extends AuthorizingRealm{
     //授权，这个方法返回角色以及角色的授权信息
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-
-        return null;
+        //获取身份信息
+        String primaryPrincipal = (String) principalCollection.getPrimaryPrincipal();
+        System.out.println("调用授权验证: "+primaryPrincipal);
+        //在工厂中获取Service对象
+        UserService userService = (UserService) ApplicationContextUtil.getBean("userService");
+        User user = userService.findByName(primaryPrincipal);
+        //获取user_permission
+        UserPermissionRepository userPermissionRepository =(UserPermissionRepository) ApplicationContextUtil.getBean("userPermissionRepository");
+        //根据user查出他所有的permission
+        List<Permission> userVSPermissionsByUser = userPermissionRepository.findUserVSPermissionsByUser(user);
+        //添加到要返回的simpleAuthorizationInfo中
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        userVSPermissionsByUser.forEach(userVSPermissionByUser-> {
+            simpleAuthorizationInfo.addStringPermission(userVSPermissionByUser.getPermissionString());
+        });
+        return simpleAuthorizationInfo;
     }
 
 

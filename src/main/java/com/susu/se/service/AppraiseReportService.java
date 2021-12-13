@@ -5,12 +5,14 @@ import com.susu.se.model.Course;
 import com.susu.se.model.Experiment;
 import com.susu.se.model.Report;
 import com.susu.se.model.users.Assistant;
+import com.susu.se.model.users.Student;
 import com.susu.se.model.users.Teacher;
 import com.susu.se.repository.*;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +36,12 @@ public class AppraiseReportService {
 
     @Autowired
     private ExperimentRepository experimentRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     //评阅实验报告，给出报告id和分数即可
     //教师评阅
@@ -99,5 +107,41 @@ public class AppraiseReportService {
 
         List<Report> reportsByExperiment = reportRepository.findReportsByExperiment(experiment);
         return Result.wrapSuccessfulResult(reportsByExperiment);
+    }
+
+    //获取某一个学生的所有实验报告
+    public Result<List<Report>> getAllReportGrade(Integer studentId, Integer courseId){
+        Optional<Course> byId = courseRepository.findById(courseId);
+        Course course = byId.get();
+
+        Optional<Student> byId1 = studentRepository.findById(studentId);
+        Student student = byId1.get();
+
+        List<Report> reports = new ArrayList<>();
+
+        //获取该学生的所有实验报告
+        Result<List<Experiment>> allExperimentOfCourseR = null;
+        try {
+            //获取某一课程的所有实验
+            allExperimentOfCourseR = experimentService.getAllExperimentOfCourse(course.getCourse_id());
+            List<Experiment> allExperimentOfCourse = allExperimentOfCourseR.getData();
+            System.out.println(allExperimentOfCourse.size());
+            //对每一个实验，通过学生和实验找出实验报告,获得这个学生关于这个班级的所有实验报告
+            for(Experiment experiment:allExperimentOfCourse){
+                Report reportByExperimentAndStudent = reportRepository.findReportByExperimentAndStudent(experiment, student);
+                try {
+                    reportByExperimentAndStudent.getAppraiseTime();
+                    if(reportByExperimentAndStudent.getAppraiseTime()!=null){
+                        reports.add(reportByExperimentAndStudent);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("哪有实验！");
+        }
+        return Result.wrapSuccessfulResult(reports);
     }
 }

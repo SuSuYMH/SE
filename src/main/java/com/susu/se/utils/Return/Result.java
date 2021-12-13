@@ -1,4 +1,4 @@
-package com.susu.se.utils;
+package com.susu.se.utils.Return;
 
 import com.susu.se.error.ServiceError;
 

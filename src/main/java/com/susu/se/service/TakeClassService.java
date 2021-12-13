@@ -6,12 +6,11 @@ import com.susu.se.model.users.Student;
 import com.susu.se.repository.ClassRepository;
 import com.susu.se.repository.StudentRepository;
 import com.susu.se.repository.TakeClassRepository;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

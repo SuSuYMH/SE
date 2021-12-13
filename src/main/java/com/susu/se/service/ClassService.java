@@ -6,7 +6,7 @@ import com.susu.se.model.users.Teacher;
 import com.susu.se.repository.ClassRepository;
 import com.susu.se.repository.CourseRepository;
 import com.susu.se.repository.TeacherRepository;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,4 +76,15 @@ public class ClassService {
         classRepository.save(aClass);
         return Result.wrapSuccessfulResult("课程信息修改成功！");
     }
+
+    //根据班级id查到对应的课程
+    public Result<Course> getCourseByClassId(Integer classID){
+        Optional<Class> byId = classRepository.findById(classID);
+        Class BanJi =byId.get();
+
+        Course course = BanJi.getCourse();
+        System.out.println(course.getCourse_id());
+        return Result.wrapSuccessfulResult(course);
+    }
+
 }

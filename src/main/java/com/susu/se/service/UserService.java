@@ -2,9 +2,8 @@ package com.susu.se.service;
 
 import com.susu.se.error.UserNotExistedError;
 import com.susu.se.model.users.*;
-import com.susu.se.model.*;
 import com.susu.se.repository.*;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import com.susu.se.utils.SaltUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;

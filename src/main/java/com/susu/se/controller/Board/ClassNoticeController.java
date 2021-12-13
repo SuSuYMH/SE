@@ -2,7 +2,7 @@ package com.susu.se.controller.Board;
 
 import com.susu.se.model.ClassNotice;
 import com.susu.se.service.Board.ClassNoticeService;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

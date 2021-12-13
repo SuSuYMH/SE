@@ -3,9 +3,11 @@ package com.susu.se.controller.File;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.json.JSONException;
 import cn.hutool.json.JSONObject;
+import com.susu.se.model.CourseFile;
 import com.susu.se.service.CourseFileService;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 @RestController
 @RequestMapping("coursefiles")
@@ -33,6 +36,13 @@ CourseFileController {
         return "upload";
     }
 
+    @GetMapping("/{courseId}")
+    public Result<List<CourseFile>> getAllFilesByCourseId(@PathVariable Integer courseId){
+        return courseFileService.getAllByCourseId(courseId);
+    }
+
+
+//    @RequiresPermissions("uploadFile")
     @ResponseBody
     @PostMapping("/uploadFile")
     public Result<String> fileUpload(@RequestParam("file") MultipartFile file,@RequestParam("courseid") Integer courseId,@RequestParam("teacherid") Integer teacherId) throws JSONException {

@@ -1,10 +1,9 @@
 package com.susu.se.controller.Academic;
 
 import com.susu.se.model.Class;
-import com.susu.se.model.Experiment;
+import com.susu.se.model.Course;
 import com.susu.se.service.ClassService;
-import com.susu.se.service.ExperimentService;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +43,12 @@ public class ClassController {
     @PostMapping("/alter/{classId}")
     public Result<String> alterOneClass(@RequestParam("week") Integer week,@RequestParam("starttime") String startTime,@RequestParam("endtime") String endTime,@RequestParam("room") String room,@RequestParam("reportrate") Integer reportRate,@RequestParam("attendrate") Integer attendRate,@RequestParam("cprate") Integer confrontPracticeRate, @PathVariable Integer classId){
         return classService.alterCourse(week, startTime, endTime, room,reportRate, attendRate, confrontPracticeRate,  classId);
+    }
+
+    //根据班级查课程
+    @GetMapping("/getcourse/{classId}")
+    public Result<Course> getCourseByClassId(@PathVariable Integer classId){
+        return classService.getCourseByClassId(classId);
     }
 
 }

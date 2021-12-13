@@ -1,6 +1,6 @@
 package com.susu.se.controller.ExceptionUtil;
 
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 public class ProjectExceptionAdvice {

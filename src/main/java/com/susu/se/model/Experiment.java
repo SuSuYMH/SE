@@ -26,6 +26,7 @@ public class Experiment {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
     @JoinColumn(name = "experiment_id")
+    @JsonBackReference
     private List<Report> reports;
 
     //多个实验对应一个课程，删除实验时不删除课程，所以是detach

@@ -1,10 +1,8 @@
 package com.susu.se.service.Board;
 
-import com.susu.se.model.Course;
-import com.susu.se.model.Experiment;
 import com.susu.se.model.SysNotice;
 import com.susu.se.repository.SysNoticeRepository;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

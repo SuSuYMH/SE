@@ -2,7 +2,7 @@ package com.susu.se.controller.Report;
 
 import com.susu.se.model.Report;
 import com.susu.se.service.SubmitReportService;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.susu.se.controller.User;
 
 import com.susu.se.service.AssistantService;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -5,7 +5,7 @@ import com.susu.se.model.Experiment;
 import com.susu.se.model.Report;
 import com.susu.se.model.users.Teacher;
 import com.susu.se.service.AppraiseReportService;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

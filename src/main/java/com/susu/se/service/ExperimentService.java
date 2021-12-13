@@ -4,7 +4,7 @@ import com.susu.se.model.Course;
 import com.susu.se.model.Experiment;
 import com.susu.se.repository.CourseRepository;
 import com.susu.se.repository.ExperimentRepository;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

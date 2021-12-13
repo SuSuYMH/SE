@@ -2,10 +2,9 @@ package com.susu.se.service;
 
 import com.susu.se.model.users.Assistant;
 import com.susu.se.model.users.Teacher;
-import com.susu.se.repository.AdministratorRepository;
 import com.susu.se.repository.AssistantRepository;
 import com.susu.se.repository.TeacherRepository;
-import com.susu.se.utils.Result;
+import com.susu.se.utils.Return.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
