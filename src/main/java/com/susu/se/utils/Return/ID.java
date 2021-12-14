@@ -6,4 +6,5 @@ import lombok.Data;
 public class ID {
     private Integer userId;
     private Integer specialId;
+    private Integer roleId;
 }

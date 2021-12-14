@@ -3,12 +3,14 @@ package com.susu.se.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.susu.se.model.users.*;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "user_permission")
+@Proxy(lazy = false)
 public class UserVSPermission {
     //这是主键
     @Id

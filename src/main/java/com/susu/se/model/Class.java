@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.susu.se.model.users.Teacher;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 ////在实体类中 发现有字段为null，在转化成json的时候，fasterxml.jackson将对象转换为json报错
 ////解决办法在实体类上面添加：
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer" ,"handler"})
+@Proxy(lazy = false)
 public class Class {
     @Id
     @Column(name = "class_id")

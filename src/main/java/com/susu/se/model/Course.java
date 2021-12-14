@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.susu.se.model.users.Administrator;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "course")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer" ,"handler"})
+@Proxy(lazy = false)
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.susu.se.model.Course;
 import com.susu.se.model.SysNotice;
 import lombok.*;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "administrator")
+@Proxy(lazy = false)
 public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

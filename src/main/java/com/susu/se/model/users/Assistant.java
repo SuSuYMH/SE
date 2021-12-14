@@ -4,6 +4,7 @@ package com.susu.se.model.users;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.susu.se.model.Report;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "assistant")
+@Proxy(lazy = false)
 public class Assistant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package com.susu.se.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.susu.se.model.users.Teacher;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name ="coursefile")
+@Proxy(lazy = false)
 public class CourseFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

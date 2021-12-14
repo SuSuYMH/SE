@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.susu.se.model.users.Student;
 import lombok.Data;
 import lombok.Getter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "takes")
+@Proxy(lazy = false)
 public class TakeClass {
 
     @Id

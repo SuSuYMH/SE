@@ -2,6 +2,7 @@ package com.susu.se.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "experiment")
+@Proxy(lazy = false)
 public class Experiment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

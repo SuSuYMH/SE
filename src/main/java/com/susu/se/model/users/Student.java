@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.susu.se.model.Report;
 import com.susu.se.model.TakeClass;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name ="student")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer" ,"handler"})
+@Proxy(lazy = false)
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

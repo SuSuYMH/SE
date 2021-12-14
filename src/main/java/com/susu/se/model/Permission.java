@@ -2,6 +2,7 @@ package com.susu.se.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "permission")
+@Proxy(lazy = false)
 public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

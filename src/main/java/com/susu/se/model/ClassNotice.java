@@ -2,6 +2,7 @@ package com.susu.se.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "class_notice")
+@Proxy(lazy = false)
 public class ClassNotice {
     @Id
     @Column(name = "notice_id")

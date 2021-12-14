@@ -5,6 +5,7 @@ import com.susu.se.model.users.Assistant;
 import com.susu.se.model.users.Student;
 import com.susu.se.model.users.Teacher;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name ="report")
+@Proxy(lazy = false)
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

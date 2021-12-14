@@ -156,24 +156,28 @@ public class UserService {
                     ID id = new ID();
                     id.setUserId(userByName.getUserId());
                     id.setSpecialId(administratorByUser.getAdministerId());
+                    id.setRoleId(roleId);
                     return Result.wrapSuccessfulResult(id).setMessage("登陆成功！");
                 case 2:
                     Teacher teacherByUser = teacherRepository.findTeacherByUser(userByName);
                     ID id1 = new ID();
                     id1.setUserId(userByName.getUserId());
                     id1.setSpecialId(teacherByUser.getTeacherId());
+                    id1.setRoleId(roleId);
                     return Result.wrapSuccessfulResult(id1).setMessage("登陆成功！");
                 case 3:
                     Assistant assistantByUser = assistantRepository.findAssistantByUser(userByName);
                     ID id2 = new ID();
                     id2.setUserId(userByName.getUserId());
                     id2.setSpecialId(assistantByUser.getAssistantId());
+                    id2.setRoleId(roleId);
                     return Result.wrapSuccessfulResult(id2).setMessage("登陆成功！");
                 case 4:
                     Student studentByUser = studentRepository.findStudentByUser(userByName);
                     ID id3 = new ID();
                     id3.setUserId(userByName.getUserId());
                     id3.setSpecialId(studentByUser.getStudentId());
+                    id3.setRoleId(roleId);
                     return Result.wrapSuccessfulResult(id3).setMessage("登陆成功！");
                 default:
                     userRepository.delete(user);

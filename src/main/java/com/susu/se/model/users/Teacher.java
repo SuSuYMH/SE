@@ -5,6 +5,7 @@ import com.susu.se.model.Class;
 import com.susu.se.model.CourseFile;
 import com.susu.se.model.Report;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name ="teacher")
+@Proxy(lazy = false)
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

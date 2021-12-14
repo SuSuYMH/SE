@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.susu.se.model.users.Administrator;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "sys_notice")
+@Proxy(lazy = false)
 public class SysNotice {
     @Id
     @Column(name = "notice_id")
