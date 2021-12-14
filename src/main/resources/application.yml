@@ -79,9 +79,9 @@ file:
   upload:
     disableTypes: dll,exe
     #自己开发时的测试上传文件路径
-#    dir: /Users/su/test-文件上传下载实验目录/
+    dir: /Users/su/test-文件上传下载实验目录/
     #docker容器中的文件路径
-    dir: /courseFile
+#    dir: /courseFile
 
 
 
