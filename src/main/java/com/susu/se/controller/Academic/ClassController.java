@@ -4,6 +4,7 @@ import com.susu.se.model.Class;
 import com.susu.se.model.Course;
 import com.susu.se.service.ClassService;
 import com.susu.se.utils.Return.Result;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,24 @@ public class ClassController {
     private ClassService classService;
 
     //添加班级
+    @RequiresPermissions("addClass")
     @PostMapping(path = "/add")
     public Result<String> addClass(@RequestParam("week") Integer week,@RequestParam("starttime") String startTime,@RequestParam("endtime") String endTime,@RequestParam("room") String room,@RequestParam("reportrate") Integer reportRate,@RequestParam("attendrate") Integer attendRate,@RequestParam("cprate") Integer confrontPracticeRate,@RequestParam("courseid") Integer courseId,@RequestParam("teacherid") Integer teacherId){
         return classService.addClass(week,startTime,endTime,room,reportRate, attendRate, confrontPracticeRate, courseId,teacherId);
+    }
+
+    //删除某一班级
+    @RequiresPermissions("deleteClass")
+    @DeleteMapping("/{classId}")
+    public Result<String> deleteOneClass(@PathVariable Integer classId){
+        return classService.deleteClass(classId);
+    }
+
+    //更新班级信息
+    @RequiresPermissions("alterClass")
+    @PostMapping("/alter/{classId}")
+    public Result<String> alterOneClass(@RequestParam("week") Integer week,@RequestParam("starttime") String startTime,@RequestParam("endtime") String endTime,@RequestParam("room") String room,@RequestParam("reportrate") Integer reportRate,@RequestParam("attendrate") Integer attendRate,@RequestParam("cprate") Integer confrontPracticeRate, @PathVariable Integer classId){
+        return classService.alterCourse(week, startTime, endTime, room,reportRate, attendRate, confrontPracticeRate,  classId);
     }
 
     //获取所有班级
@@ -31,18 +47,6 @@ public class ClassController {
     @GetMapping("/{courseId}")
     public Result<List<Class>> getAllOfCourse(@PathVariable Integer courseId){
         return classService.getAllClassOfCourse(courseId);
-    }
-
-    //删除某一班级
-    @DeleteMapping("/{classId}")
-    public Result<String> deleteOneClass(@PathVariable Integer classId){
-        return classService.deleteClass(classId);
-    }
-
-    //更新班级信息
-    @PostMapping("/alter/{classId}")
-    public Result<String> alterOneClass(@RequestParam("week") Integer week,@RequestParam("starttime") String startTime,@RequestParam("endtime") String endTime,@RequestParam("room") String room,@RequestParam("reportrate") Integer reportRate,@RequestParam("attendrate") Integer attendRate,@RequestParam("cprate") Integer confrontPracticeRate, @PathVariable Integer classId){
-        return classService.alterCourse(week, startTime, endTime, room,reportRate, attendRate, confrontPracticeRate,  classId);
     }
 
     //根据班级查课程

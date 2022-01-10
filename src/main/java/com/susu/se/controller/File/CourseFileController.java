@@ -36,6 +36,7 @@ CourseFileController {
         return "upload";
     }
 
+    //根据courseid查询所有文件
     @GetMapping("/{courseId}")
     public Result<List<CourseFile>> getAllFilesByCourseId(@PathVariable Integer courseId){
         return courseFileService.getAllByCourseId(courseId);
@@ -52,6 +53,7 @@ CourseFileController {
 
     // 下载到了默认的位置
     //注意这个没写业务层，直接在这里全部实现了
+    @RequiresPermissions("downloadFile")
     @ResponseBody
     @GetMapping("/downloadFile")
     public Result<String> fileDownload(HttpServletResponse response, @RequestParam("courseid") Integer courseId, @RequestParam("filename") String fileName) throws JSONException, IOException {
@@ -74,10 +76,12 @@ CourseFileController {
         OutputStream os = response.getOutputStream();
         os.write(readBytes);
 
+        //下载文件次数加一
         return courseFileService.downloadTimesPlusOne(fileName);
     }
 
 
+    @RequiresPermissions("deleteFile")
     @ResponseBody
     @PostMapping("/deleteFile")
     public Result<String> deleteFile(HttpServletResponse response, @RequestParam("courseid") Integer courseId, @RequestParam("filename") String fileName) throws JSONException {

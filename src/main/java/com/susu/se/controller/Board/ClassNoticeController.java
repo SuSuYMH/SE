@@ -3,6 +3,7 @@ package com.susu.se.controller.Board;
 import com.susu.se.model.ClassNotice;
 import com.susu.se.service.Board.ClassNoticeService;
 import com.susu.se.utils.Return.Result;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,18 +28,21 @@ public class ClassNoticeController {
     }
 
     //添加classnotice
+    @RequiresPermissions("addclassnotice")
     @PostMapping(path = "/add")
     public Result<String> addNotice(@RequestParam("classid") Integer classId, @RequestParam("category") String category,@RequestParam("title") String title,@RequestParam("content") String content){
         return classNoticeService.addClassNotice( category, title, content, classId);
     }
 
     //删除classnotice
+    @RequiresPermissions("deleteclassnotice")
     @DeleteMapping("/{sysNoticeId}")
     public Result<String> deleteSysNotice(@PathVariable Integer sysNoticeId){
         return classNoticeService.deleteClassNotice(sysNoticeId);
     }
 
     //更改classNotice
+    @RequiresPermissions("alterclassnotice")
     @PostMapping("/alter/{sysNoticeId}")
     public Result<String> alterSysNotice(@PathVariable Integer sysNoticeId, @RequestParam("category") String category,@RequestParam("title") String title,@RequestParam("content") String content){
         return classNoticeService.alterClassNotice(sysNoticeId, category, title, content);

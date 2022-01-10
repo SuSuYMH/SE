@@ -49,8 +49,7 @@ public class UserService {
     public Result<List<User>> getAllUser(){
         List<User> userlist = (List<User>) userRepository.findAll();
 
-        Boolean nullornot = userlist.isEmpty();
-        return new Result<>(nullornot, userlist);
+        return Result.wrapSuccessfulResult(userlist);
     }
 
     public Result<String> deleteById(Integer id){

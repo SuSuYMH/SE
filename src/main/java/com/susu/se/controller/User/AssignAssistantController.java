@@ -2,6 +2,7 @@ package com.susu.se.controller.User;
 
 import com.susu.se.service.AssistantService;
 import com.susu.se.utils.Return.Result;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ public class AssignAssistantController {
     @Autowired
     private AssistantService assistantService;
 
+    @RequiresPermissions("assignTA")
     @PostMapping
     public Result<String> assign(@RequestParam("teacherid") Integer teacherId,@RequestParam("assistantid") Integer assistantId){
         return assistantService.chooseTA(teacherId, assistantId);

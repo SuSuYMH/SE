@@ -28,7 +28,7 @@ spring:
     host: 139.224.65.154
     port: 6379
     database: 0
-    password: 123456
+    password: YMHlikebaby99YMHlikebaby99
     jedis:
       pool:
         # 连接池最大连接数（使用负值表示没有限制）
@@ -41,12 +41,7 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      #自己开发时使用的数据库
-#      url: jdbc:mysql://139.224.65.154:3306/SE6?serverTimezone=UTC
-#      username: root
-#      password: YMHlikebaby99
-#      放到服务器上的时候的数据库
-      url: jdbc:mysql://106.14.69.227:3306/SE6?serverTimezone=UTC
+      url: jdbc:mysql://106.14.69.227:3306/SE_FINAL?serverTimezone=Asia/Shanghai
       username: root
       password: Db123456?
 
@@ -79,9 +74,9 @@ file:
   upload:
     disableTypes: dll,exe
     #自己开发时的测试上传文件路径
-    dir: /Users/su/test-文件上传下载实验目录/
+#    dir: /Users/su/test-文件上传下载实验目录/
     #docker容器中的文件路径
-#    dir: /courseFile
+    dir: /courseFile
 
 
 

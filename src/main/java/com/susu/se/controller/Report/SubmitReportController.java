@@ -3,6 +3,7 @@ package com.susu.se.controller.Report;
 import com.susu.se.model.Report;
 import com.susu.se.service.SubmitReportService;
 import com.susu.se.utils.Return.Result;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +13,13 @@ public class SubmitReportController {
     @Autowired
     private SubmitReportService submitReportService;
 
+    @RequiresPermissions("submitReport")
     @PostMapping(path = "/submit")
     public Result<String> submit(@RequestParam("experimentid") Integer experimentId,@RequestParam("studentid") Integer studentId,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("conclusion") String conclusion){
         return submitReportService.submitReport(experimentId, studentId, title, content, conclusion);
     }
 
+    @RequiresPermissions("alterReport")
     @PostMapping(path = "/alter")
     public Result<String> alter(@RequestParam("reportid") Integer reportId,@RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("conclusion") String conclusion){
         return submitReportService.alterReport(reportId, title, content, conclusion);

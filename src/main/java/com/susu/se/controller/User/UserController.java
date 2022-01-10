@@ -5,6 +5,7 @@ import com.susu.se.service.UserService;
 import com.susu.se.utils.Return.ID;
 import com.susu.se.utils.Return.Result;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class UserController {
         return userService.getUser(id);
     }
 
-    //查询所有管理员,先试一下没有返回标准形式
+    //查询所有user,先试一下没有返回标准形式
     @GetMapping
     public Result<List<User>> getAll(){
         return userService.getAllUser();
@@ -33,6 +34,7 @@ public class UserController {
     public Result<String> deleteById(@PathVariable Integer id){ return userService.deleteById(id);}
 
     //注册
+//    @RequiresPermissions("administrator")
     @PostMapping(path = "/register")
     public Result<String> register(@RequestParam("name") String name, @RequestParam("password") String password, @RequestParam("roleid") Integer roleId, @RequestParam("email") String email){
         return userService.register(name, password, roleId, email);

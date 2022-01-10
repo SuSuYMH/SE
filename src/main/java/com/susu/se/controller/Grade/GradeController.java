@@ -1,4 +1,4 @@
-package com.susu.se.controller;
+package com.susu.se.controller.Grade;
 
 import com.susu.se.service.GradeService;
 import com.susu.se.utils.Return.ExperimentMeanScore;
@@ -20,6 +20,7 @@ public class GradeController {
         return gradeService.getGradeByStudentIdAndClassId(studentId, classId);
     }
 
+    //获取班级内每个学生的成绩
     @GetMapping("studentgrade/{classID}")
     public Result<List<StudentGradeUtil>> getAllStudentsGradeByClassId(@PathVariable Integer classID){
         return gradeService.getAllStudentGradeByClassID(classID);

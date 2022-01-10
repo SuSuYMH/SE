@@ -30,6 +30,9 @@ public class ActivationService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PermissionService permissionService;
+
     //向邮箱中发送验证码，并将email：验证码这个键值对存在redis中三分钟
     public Result<String> activationMail(Integer userId){
         //根据userid获取当前账号的邮箱
@@ -78,6 +81,9 @@ public class ActivationService {
             User user = byId.get();
             user.setActivation(true);
             userRepository.save(user);
+
+            //赋予相应的初始权限！
+            System.out.println(permissionService.setInitialPermission(userId, user.getRoleId()).getMessage());
             return Result.wrapSuccessfulResult("账号激活成功").setMessage("账号激活成功！");
         }else{
             return Result.wrapErrorResult("验证码错误！");

@@ -22,6 +22,13 @@ public class Permission {
 
     private String description;
 
+    //权限所应该属于哪个身份
+    //1.administrator
+    //2.teacher
+    //3.assistant
+    //4.student
+    private Integer shouldBelongRoleID;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonBackReference
