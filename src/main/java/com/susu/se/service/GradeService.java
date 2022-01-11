@@ -55,6 +55,7 @@ public class GradeService {
         singleStudentGradeUtil.setReportRate(Rrate);
         singleStudentGradeUtil.setClassName(BanJi.getCourse().getName());
         singleStudentGradeUtil.setName(student.getUser().getName());
+        singleStudentGradeUtil.setStudentID(student.getStudentId());
         //设置成绩初始值
         singleStudentGradeUtil.setReportScore(new Double(Rrate));
         singleStudentGradeUtil.setAttendScore(new Double(Arate));

@@ -41,6 +41,7 @@ public class Student {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
     @JoinColumn(name = "student_id")
+    @JsonBackReference
     private List<Report> reports;
 
 }

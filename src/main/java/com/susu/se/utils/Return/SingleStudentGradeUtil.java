@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class SingleStudentGradeUtil {
     private String name;
+    //学生ID
+    private Integer studentID;
     private String className;
     //总成绩
     private Double grade;
@@ -17,4 +19,5 @@ public class SingleStudentGradeUtil {
     private Double reportScore;
     //签到成绩
     private Double attendScore;
+
 }
