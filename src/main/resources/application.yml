@@ -41,7 +41,7 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://106.14.69.227:3306/SE_FINAL?serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://106.14.69.227:3306/SE_now?serverTimezone=Asia/Shanghai
       username: root
       password: Db123456?
 

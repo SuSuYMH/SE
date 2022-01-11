@@ -59,12 +59,10 @@ public class TestRealm extends AuthorizingRealm{
         UserService userService = (UserService) ApplicationContextUtil.getBean("userService");
         //用获取到的Service对象和名字来获取与数据库对应的user对象
         User user = userService.findByName(principal);
-
         if(!ObjectUtils.isEmpty(user)){
             //构造一个认证信息进行返回
             return new SimpleAuthenticationInfo(user.getName(), user.getPassword(), ByteSource.Util.bytes(user.getSalt()), this.getName());
         }
-
         return null;
     }
 }

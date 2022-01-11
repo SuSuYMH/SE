@@ -51,21 +51,19 @@ public class ShiroConfig {
         //配置系统的受限资源
         Map<String, String> map = new HashMap<>();
         // map.put("/**","authc")表示系统中所有的资源都要进行认证和授权
-//        map.put("/administrators","authc");//authc:请求这个资源需要认证和授权
+        //map.put("/administrators","authc");//authc:请求这个资源需要认证和授权
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         //配置系统的公共资源
 
-
         //默认认证界面路径
         shiroFilterFactoryBean.setLoginUrl("/login");
-
 
         return shiroFilterFactoryBean;
     }
 
     //创建安全管理器
     @Bean
-    public DefaultWebSecurityManager defaultWebSecurityManager(Realm realm){
+    public DefaultWebSecurityManager defaultWebSecurityManager(Realm realm) {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         //给安全管理器设置Realm
         defaultWebSecurityManager.setRealm(realm);
