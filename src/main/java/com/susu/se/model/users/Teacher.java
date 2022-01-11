@@ -28,11 +28,13 @@ public class Teacher {
     //一个老师对应多个助教，删除老师的同时删除助教，没有老师助教没有意义
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
+    @JsonBackReference
     private List<Assistant> assistants;
 
     //老师向某个课程上传文件,删除老师不会删除对应的文件
     @OneToMany(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
+    @JsonBackReference
     private List<CourseFile> courseFiles;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -44,6 +46,7 @@ public class Teacher {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //外键字段的名称
     @JoinColumn(name = "teacher_id")
+    @JsonBackReference
     private List<Report> reports;
 
 
