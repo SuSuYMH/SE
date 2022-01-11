@@ -122,6 +122,9 @@ public class GradeService {
                 }
             }
             R_Grade = R_Grade/(numOfAlreadyOK*100)*Rrate;
+            if(numOfAlreadyOK == 0){
+                R_Grade = new Double(Rrate);
+            }
             singleStudentGradeUtil.setReportScore(R_Grade);
             System.out.println(R_Grade);
         } catch (Exception e) {
