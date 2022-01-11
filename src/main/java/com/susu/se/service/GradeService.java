@@ -226,6 +226,7 @@ public class GradeService {
             StudentGradeUtil studentGradeUtil = new StudentGradeUtil();
             studentGradeUtil.setGrade(gradeByStudentIdAndClassId.getData());
             studentGradeUtil.setName(student.getUser().getName());
+            studentGradeUtil.setStudentID(student.getStudentId());
             studentGradeUtils.add(studentGradeUtil);
         }
         return Result.wrapSuccessfulResult(studentGradeUtils);
