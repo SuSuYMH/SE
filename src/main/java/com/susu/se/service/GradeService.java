@@ -224,10 +224,10 @@ public class GradeService {
         for(Student student:studentList){
             System.out.println(student.getGrade());
             //获取这个学生的成绩
-            Result<Double> gradeByStudentIdAndClassId = getGradeByStudentIdAndClassId(student.getStudentId(), classID);
+            Double gradeByStudentIdAndClassId = newGetGradeByStudentIdAndClassId(student.getStudentId(), classID).getData().getGrade();
             //将成绩和学生姓名添加进studentGradeUtils中
             StudentGradeUtil studentGradeUtil = new StudentGradeUtil();
-            studentGradeUtil.setGrade(gradeByStudentIdAndClassId.getData());
+            studentGradeUtil.setGrade(gradeByStudentIdAndClassId);
             studentGradeUtil.setName(student.getUser().getName());
             studentGradeUtil.setStudentID(student.getStudentId());
             studentGradeUtils.add(studentGradeUtil);
